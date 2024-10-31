@@ -37,7 +37,7 @@ public class TestControllerWithMockAuthUserTest {
     }
 
     @Test
-    public void testEndpoint_WithoutAuthentication_ShouldReturnUnauthorized() throws Exception {
+    public void 토큰이_없을_경우() throws Exception {
         mockMvc.perform(get("/test"))
                 .andExpect(status().isForbidden());
     }
