@@ -51,4 +51,10 @@ public class TestControllerTest {
         mockMvc.perform(get("/test"))
                 .andExpect(status().isForbidden());
     }
+
+    @Test
+    public void 허용된_API일_경우() throws Exception {
+        mockMvc.perform(get("/open"))
+                .andExpect(status().isOk());
+    }
 }

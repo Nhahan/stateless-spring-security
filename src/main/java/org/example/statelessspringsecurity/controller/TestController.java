@@ -19,4 +19,8 @@ public class TestController {
         log.info("Email: {}", authUser.getEmail());
         log.info("Authorities: {}", authUser.getAuthorities());
     }
+
+    @GetMapping("/open")
+    public void open() {
+    }
 }
