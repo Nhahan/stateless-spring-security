@@ -38,15 +38,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String jwt = jwtUtil.substringToken(authorizationHeader);
             try {
                 Claims claims = jwtUtil.extractClaims(jwt);
-                Long userId = Long.valueOf(claims.getSubject());
-                String email = claims.get("email", String.class);
-                UserRole userRole = UserRole.of(claims.get("userRole", String.class));
 
                 if (SecurityContextHolder.getContext().getAuthentication() == null) {
-                    AuthUser authUser = new AuthUser(userId, email, userRole);
-
-                    JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(authUser);
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    setAuthentication(claims);
                 }
             } catch (SecurityException | MalformedJwtException e) {
                 log.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.", e);
@@ -63,5 +57,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(httpRequest, httpResponse);
+    }
+
+    private void setAuthentication(Claims claims) {
+        Long userId = Long.valueOf(claims.getSubject());
+        String email = claims.get("email", String.class);
+        UserRole userRole = UserRole.of(claims.get("userRole", String.class));
+
+        AuthUser authUser = new AuthUser(userId, email, userRole);
+        JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(authUser);
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
     }
 }
