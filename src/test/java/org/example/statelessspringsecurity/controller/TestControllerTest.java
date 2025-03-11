@@ -1,13 +1,12 @@
 package org.example.statelessspringsecurity.controller;
 
-import org.example.statelessspringsecurity.dto.AuthUser;
 import org.example.statelessspringsecurity.config.JwtAuthenticationToken;
 import org.example.statelessspringsecurity.config.JwtUtil;
 import org.example.statelessspringsecurity.config.SecurityConfig;
+import org.example.statelessspringsecurity.dto.AuthUser;
 import org.example.statelessspringsecurity.enums.UserRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,7 +16,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(TestController.class)
-@AutoConfigureMockMvc
 @Import({SecurityConfig.class, JwtUtil.class})
 public class TestControllerTest {
 
