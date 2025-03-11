@@ -1,7 +1,7 @@
 # JWT를 활용한 Stateless Spring Security 예제
 
 ## 프로젝트 소개
-이 프로젝트는 Spring Security와 JWT(JSON Web Token)를 활용한 Stateless 인증 구현 예제입니다. 기존 세션 기반 인증 방식 대신 JWT를 사용하여 서버가 상태를 유지하지 않는(Stateless) 방식으로 인증을 구현했습니다.
+이 프로젝트는 Spring Security와 JWT(JSON Web Token)를 활용한 Stateless 인증 구현 예제입니다.
 
 ## 기술 스택
 - Java 17
@@ -52,7 +52,7 @@ src
 ```yaml
 jwt:
   secret:
-    key: [시크릿 키]  # 최소 256비트 이상의 Base64 인코딩된 시크릿 키
+    key: [시크릿 키]
 ```
 
 ## 테스트 코드
@@ -99,7 +99,7 @@ public void 권한이_ADMIN일_경우_200() throws Exception {
 
 이 방식은 여러 테스트에서 동일한 인증 정보를 재사용할 수 있어 코드 중복을 줄일 수 있습니다.
 
-### 3. 커스텀 어노테이션 방식 (TestControllerWithMockAuthUserTest)
+### 3. 커스텀 어노테이션 방식 (TestControllerWithMockAuthUserTest) - 추천
 `@WithMockAuthUser`와 같은 커스텀 어노테이션을 생성하여 테스트 메서드에 직접 인증 정보를 설정하는 방식입니다.
 
 ```java
@@ -139,7 +139,6 @@ public class TestSecurityContextFactory implements WithSecurityContextFactory<Wi
 ```
 
 ### 통합 테스트 (AuthIntegrationTest)
-위 세 가지 테스트 방식 외에도, 실제 회원가입과 로그인 프로세스를 통해 JWT 토큰을 발급받고 이를 사용하여 엔드포인트를 호출하는 통합 테스트도 구현되어 있습니다.
 
 ```java
 @Test
@@ -169,8 +168,6 @@ public void 회원가입과_로그인_후_ADMIN_인가를_통과하고_유저_�
             .andExpect(status().isOk());
 }
 ```
-
-이 통합 테스트는 실제 애플리케이션 동작 흐름을 그대로 테스트하므로 전체 인증 프로세스의 동작을 검증하는 데 유용합니다.
 
 ## 라이센스
 이 프로젝트는 LICENSE 파일에 명시된 라이센스 조건에 따라 배포됩니다. 
