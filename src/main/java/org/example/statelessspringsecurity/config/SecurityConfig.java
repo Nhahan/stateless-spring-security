@@ -32,15 +32,16 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // SessionManagementFilter, SecurityContextPersistenceFilter
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(jwtAuthenticationFilter, SecurityContextHolderAwareRequestFilter.class)
-                .formLogin(AbstractHttpConfigurer::disable) // UsernamePasswordAuthenticationFilter, DefaultLoginPageGeneratingFilter 비활성화
-                .anonymous(AbstractHttpConfigurer::disable) // AnonymousAuthenticationFilter 비활성화
-                .httpBasic(AbstractHttpConfigurer::disable) // BasicAuthenticationFilter 비활성화
-                .logout(AbstractHttpConfigurer::disable) // LogoutFilter 비활성화
+                .formLogin(AbstractHttpConfigurer::disable)
+                .anonymous(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
+                .rememberMe(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/signin", "/auth/signup").permitAll()
+                        .requestMatchers(request -> request.getRequestURI().startsWith("/auth")).permitAll()
                         .requestMatchers("/test").hasAuthority(UserRole.Authority.ADMIN)
                         .requestMatchers("/open").permitAll()
                         .anyRequest().authenticated()
