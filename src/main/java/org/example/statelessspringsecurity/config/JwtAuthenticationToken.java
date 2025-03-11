@@ -1,5 +1,6 @@
 package org.example.statelessspringsecurity.config;
 
+import org.example.statelessspringsecurity.dto.AuthUser;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {

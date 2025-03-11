@@ -1,6 +1,6 @@
 package org.example.statelessspringsecurity.controller;
 
-import org.example.statelessspringsecurity.config.AuthUser;
+import org.example.statelessspringsecurity.dto.AuthUser;
 import org.example.statelessspringsecurity.config.JwtAuthenticationToken;
 import org.example.statelessspringsecurity.config.JwtUtil;
 import org.example.statelessspringsecurity.config.SecurityConfig;

@@ -1,7 +1,7 @@
 package org.example.statelessspringsecurity.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.statelessspringsecurity.config.AuthUser;
+import org.example.statelessspringsecurity.dto.AuthUser;
 import org.example.statelessspringsecurity.enums.UserRole;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

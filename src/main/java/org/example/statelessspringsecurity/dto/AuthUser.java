@@ -1,4 +1,4 @@
-package org.example.statelessspringsecurity.config;
+package org.example.statelessspringsecurity.dto;
 
 import lombok.Getter;
 import org.example.statelessspringsecurity.enums.UserRole;
